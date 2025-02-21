@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가위바위보 게임</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="root">
+      <h1>가위바위보 게임</h1>
+
+      <!-- 컴퓨터의 선택을 나타낼 이미지 -->
+      <div class="comRsp">
+        <img
+          src="https://cdn-icons-png.flaticon.com/128/6688/6688580.png"
+          alt="comRsp"
+          id="comChoice"
+        />
+      </div>
+
+      <div>
+        <p>VS</p>
+      </div>
+
+      <!-- 사용자 선택 버튼 (처음에는 비활성화) -->
+      <div id="buttons" style="display: none">
+        <button onclick="userChoice('가위')">가위✌</button>
+        <button onclick="userChoice('바위')">바위✊</button>
+        <button onclick="userChoice('보')">보🖐</button>
+      </div>
+
+      <!-- 게임 시작 버튼 -->
+      <button id="stbtn" onclick="startGame()">Start</button>
+
+      <div id="result"></div>
+
+      <script src="index.js"></script>
+    </div>
+  </body>
+</html>
