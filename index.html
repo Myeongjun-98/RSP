@@ -5,27 +5,24 @@
     -
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>가위바위보 게임</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css.css" />
   </head>
   <body>
     <div id="root">
       <h1>가위바위보 게임</h1>
       <div class="comRsp">
-        <img
-          src="https://cdn-icons-png.flaticon.com/128/6688/6688580.png"
-          alt="comRsp"
-        />
+        <img1 src="https://cdn-icons-png.flaticon.com/128/9534/9534501.png" />
+        <img2 src="https://cdn-icons-png.flaticon.com/128/13992/13992554.png" />
+        <img3 src="https://cdn-icons-png.flaticon.com/128/9396/9396667.png" />
       </div>
       <div>
         <p>VS</p>
       </div>
 
-      <div alt="btn">
-        <button id="scissorsButton" onclick="disableButtons(this)">
-          가위✌
-        </button>
-        <button id="rockButton" onclick="disableButtons(this)">바위✊</button>
-        <button id="paperButton" onclick="disableButtons(this)">보🖐</button>
+      <div alt=".rsp-btn">
+        <button id="가위" onclick="disableButtons(this)">가위✌</button>
+        <button id="바위" onclick="disableButtons(this)">바위✊</button>
+        <button id="보" onclick="disableButtons(this)">보🖐</button>
       </div>
       <p id="displayText">안내면진다</p>
 
@@ -33,8 +30,9 @@
         <button id="startButton">Start</button>
         <button id="resetButton">Reset</button>
       </div>
+      <p id="resultText"></p>
 
-      <script src="index.js"></script>
+      <script src="index.js.js"></script>
     </div>
   </body>
 </html>
