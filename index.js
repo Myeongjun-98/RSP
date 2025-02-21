@@ -47,21 +47,21 @@ document.getElementById("바위").addEventListener("click", handleUserChoice);
 document.getElementById("보").addEventListener("click", handleUserChoice);
 
 let user = ["가위", "바위", "보"];
-// document.getElementById("가위").addEventListener("click", function () {
-//   let com = user[Math.floor(Math.random() * 3)];
-//   let userChoice = "가위";
-//   if (userChoice === com) {
-//     console.log("비겼습니다.");
-//   } else if (
-//     (userChoice === "가위" && com === "보") ||
-//     (userChoice === "바위" && com === "가위") ||
-//     (userChoice === "보" && com === "바위")
-//   ) {
-//     console.log("당신이 이겼습니다.");
-//   } else {
-//     console.log("당신이 졌습니다");
-//   }
-// });
+document.getElementById("가위").addEventListener("click", function () {
+  let com = user[Math.floor(Math.random() * 3)];
+  let userChoice = "가위";
+  if (userChoice === com) {
+    console.log("비겼습니다.");
+  } else if (
+    (userChoice === "가위" && com === "보") ||
+    (userChoice === "바위" && com === "가위") ||
+    (userChoice === "보" && com === "바위")
+  ) {
+    console.log("당신이 이겼습니다.");
+  } else {
+    console.log("당신이 졌습니다");
+  }
+});
 
 document.getElementById("바위").addEventListener("click", function () {
   let com = user[Math.floor(Math.random() * 3)];
@@ -79,17 +79,8 @@ document.getElementById("바위").addEventListener("click", function () {
   }
 });
 
-function disableButtons(state) {}
-document.getElementById("resetButton").addEventListener("click", function () {
-  if (interval) clearInterval(interval);
-  index = 0;
-  userChoiceMade = false;
-  gameStarted = false;
-  document.getElementById("displayText").textContent = "안내면진다";
-  document.getElementById("resultText").textContent = "";
-  document.getElementById("startButton").disabled = false;
-  document.getElementById("resetButton").disabled = true;
-  document.getElementById("scissorsButton").disabled = true;
-  document.getElementById("rockButton").disabled = true;
-  document.getElementById("paperButton").disabled = true;
+const resetButton = document.getElementById("resetButton");
+
+resetButton.addEventListener("click", () => {
+  location.reload(true);
 });
