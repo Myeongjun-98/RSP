@@ -12,11 +12,11 @@ document.getElementById("startButton").addEventListener("click", function () {
   document.getElementById("startButton").disabled = true;
   document.getElementById("resetButton").disabled = true;
   document.getElementById("resultText").textContent = "";
-
+  
   interval = setInterval(() => {
     index++;
     document.getElementById("displayText").textContent = texts[index];
-
+    
     if (index === texts.length - 1) {
       clearInterval(interval);
       document.getElementById("가위").disabled = false;
@@ -27,47 +27,22 @@ document.getElementById("startButton").addEventListener("click", function () {
 });
 
 //* PC랜덤
-// 랜덤 가위바위보 선택 함수
+
+
+// 가위바위보 이미지 매핑
+const choiceImages = {
+  "가위": "https://cdn-icons-png.flaticon.com/128/9534/9534501.png",
+  "바위": "https://cdn-icons-png.flaticon.com/128/13992/13992554.png",
+  "보": "https://cdn-icons-png.flaticon.com/128/9396/9396667.png"
+};
+// 랜덤으로 pc가위바위보 선택택
 function getRandomChoice() {
   const choices = ["가위", "바위", "보"];
-  return choices[Math.floor(Math.random() * choices.length)];
+  const randomChoice = choices[Math.floor(Math.random() * choices.length)];
+  console.log(`🔹 PC 선택: ${randomChoice}`); // 콘솔에 출력!
+  return randomChoice;
 }
-function getImageForChoice(choice) {
-  const comRsp = {
-    가위: "https://cdn-icons-png.flaticon.com/128/9534/9534501.png",
-    바위: "https://cdn-icons-png.flaticon.com/128/13992/13992554.png",
-    보: "https://cdn-icons-png.flaticon.com/128/9396/9396667.png",
-  };
-  return (
-    comRsp[choice] || "https://cdn-icons-png.flaticon.com/128/6688/6688580.png"
-  );
-}
-// 가위바위보 버튼 클릭 시 동작
-document.querySelectorAll("button[id$='Button']").forEach((button) => {
-  button.addEventListener("click", function () {
-    if (index === texts.length - 1 && !userChoiceMade) {
-      userChoiceMade = true;
-      const userChoice = this.textContent.trim().slice(0, 2);
-      const pcChoice = getRandomChoice();
 
-      // 이미지 변경
-      const pcImage = document.querySelector(".comRsp img");
-      if (pcImage) {
-        pcImage.src = getImageForChoice(pcChoice);
-      }
-
-      // 결과 출력
-      document.getElementById(
-        "displayText"
-      ).textContent = `사용자: ${userChoice} | PC: ${pcChoice} → ${determineWinner(
-        userChoice,
-        pcChoice
-      )}`;
-
-      disableButtons(this);
-    }
-  });
-});
 
 function disableButtons(state) {}
 
