@@ -2,7 +2,6 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    -
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>가위바위보 게임</title>
     <link rel="stylesheet" href="style.css" />
@@ -12,13 +11,11 @@
       <h1>가위바위보 게임</h1>
  
       <div id ="game-container">
-        <img id="images" 
+        <img id="image" 
         src="https://cdn-icons-png.flaticon.com/128/6688/6688560.png" 
         alt="가위바위보">
-        <div id="result"></div>
       </div>
 
-        
       <div>
         <p>VS</p>
       </div>
@@ -34,10 +31,14 @@
         <button id="startButton">Start</button>
         <button id="resetButton">Reset</button>
       </div>
-      
   </div>
 
-      <p id="resultText"></p>
+    <div id="event-container">
+      <div id="event"></div>
+      <button id="close-btn" onclick="closeEvent()">닫기</button>
+    </div>
+      <div id="result"></div>
+      
 
       <script src="index.js"></script>
     </div>
