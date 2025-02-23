@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    -
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가위바위보 게임</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="root">
+      <h1>가위바위보 게임</h1>
+ 
+      <div id ="game-container">
+        <img id="images" 
+        src="https://cdn-icons-png.flaticon.com/128/6688/6688560.png" 
+        alt="가위바위보">
+        <div id="result"></div>
+      </div>
+
+        
+      <div>
+        <p>VS</p>
+      </div>
+
+      <div alt=".rsp-btn">
+        <button id="가위" onclick="disableButtons(this)">가위✌</button>
+        <button id="바위" onclick="disableButtons(this)">바위✊</button>
+        <button id="보" onclick="disableButtons(this)">보🖐</button>
+      </div>
+      <p id="displayText">안내면진다</p>
+
+      <div>
+        <button id="startButton">Start</button>
+        <button id="resetButton">Reset</button>
+      </div>
+      
+  </div>
+
+      <p id="resultText"></p>
+
+      <script src="index.js"></script>
+    </div>
+  </body>
+</html>
