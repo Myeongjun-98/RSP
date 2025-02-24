@@ -2,6 +2,7 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>가위바위보 게임</title>
     <link rel="stylesheet" href="style.css" />
@@ -9,18 +10,20 @@
   <body>
     <div id="root">
       <h1>가위바위보 게임</h1>
- 
-      <div id ="game-container">
-        <img id="image" 
-        src="https://cdn-icons-png.flaticon.com/128/6688/6688560.png" 
-        alt="가위바위보">
+
+      <div id="game-container">
+        <img
+          id="image"
+          src="https://cdn-icons-png.flaticon.com/128/6688/6688560.png"
+          alt="가위바위보"
+        />
       </div>
 
       <div>
         <p>VS</p>
       </div>
 
-      <div alt=".rsp-btn">
+      <div class="rsp-btn">
         <button id="가위" onclick="disableButtons(this)">가위✌</button>
         <button id="바위" onclick="disableButtons(this)">바위✊</button>
         <button id="보" onclick="disableButtons(this)">보🖐</button>
@@ -31,16 +34,15 @@
         <button id="startButton">Start</button>
         <button id="resetButton">Reset</button>
       </div>
-  </div>
+    </div>
 
-    <div id="event-container">
+    <div id="modal-overlay"></div>
+    <div id="modal">
       <div id="event"></div>
-      <button id="close-btn" onclick="closeEvent()">닫기</button>
+      <div id="result-detail"></div>
+      <button onclick="closeModal()">닫기</button>
     </div>
-      <div id="result"></div>
-      
 
-      <script src="index.js"></script>
-    </div>
+    <script src="index.js"></script>
   </body>
 </html>
