@@ -1,128 +1,181 @@
-//* start 버튼 이후 안내면 진다 출력 및 타이머 시작 후 "보"까지 출력 후 자동 멈춤
 const texts = ["안내면진다", "가위", "바위", "보"];
 let index = 0;
-let interverl;
 let userChoiceMade = false;
-let img = document.querySelector("img");
+let gameStarted = false;
 
-let imgArray = new Array();
-imgArray[0] = "paper.png";
-imgArray[1] = "rock.png";
-imgArray[2] = "scissors.png";
-
-document.getElementById("startBtn");
-document.addEventListener("click", function () {
-  if (interverl) clearInterval(interverl);
+// start 버튼
+document.getElementById("startButton").addEventListener("click", function () {
   index = 0;
   userChoiceMade = false;
+  gameStarted = true;
   document.getElementById("displayText").textContent = texts[index];
   document.getElementById("startButton").disabled = true;
+  document.getElementById("resetButton").disabled = true;
 
-  interverl = setInterval(() => {
+  interval = setInterval(() => {
     index++;
     document.getElementById("displayText").textContent = texts[index];
 
     if (index === texts.length - 1) {
-      clearInterval(interverl);
+      clearInterval(interval);
+      document.getElementById("가위").disabled = false;
+      document.getElementById("바위").disabled = false;
+      document.getElementById("보").disabled = false;
     }
   }, 1000);
+  startGame();
 });
 
-function handleUserChoice() {
-  if (index === texts.length - 1 && !userChoiceMade) {
-    userChoiceMade = true;
-  }
-}
-//* 가위바위보 버튼 중 한 선택
-document.getElementById("scissorsButton");
-document.addEventListener("click", handleUserChoice);
-document
-  .getElementById("rockButton")
-  .addEventListener("click", handleUserChoice);
-document
-  .getElementById("paperButton")
-  .addEventListener("click", handleUserChoice);
+const generateRandomNumber = () => Math.floor(Math.random() * 3 + 1);
+let imgIndex = generateRandomNumber();
 
-//* PC랜덤
-// 랜덤 가위바위보 선택 함수
+// 컴퓨터 이미지 랜덤 출력
+const image = [
+  "https://cdn-icons-png.flaticon.com/128/9534/9534501.png",
+  "https://cdn-icons-png.flaticon.com/128/13992/13992554.png",
+  "https://cdn-icons-png.flaticon.com/128/12355/12355903.png",
+];
+let interval;
+
+function startGame() {
+  document.getElementById("modal-overlay").style.display = "none";
+  document.getElementById("modal").innerText = "";
+  document.getElementById("image").src =
+    "https://cdn-icons-png.flaticon.com/128/6688/6688560.png";
+
+  let index = 0;
+
+  // 이미지가 일정시간동안 자동으로 출력
+  setTimeout(() => {
+    interval = setInterval(() => {
+      document.getElementById("image").src = image[index];
+      index = (index + 1) % image.length;
+    }, 100);
+  }, 1000);
+
+  setTimeout(() => {
+    clearInterval(interval);
+    const computerChoice = Math.floor(Math.random() * image.length);
+    const finalChoice = Math.floor(Math.random() * image.length);
+    document.getElementById("image").src = image[finalChoice];
+  }, 6000);
+}
+
+// 랜덤으로 pc가위바위보 선택
 function getRandomChoice() {
   const choices = ["가위", "바위", "보"];
-  return choices[Math.floor(Math.random() * choices.length)];
+  const randomChoice = choices[Math.floor(Math.random() * choices.length)];
+  console.log(`🔹 PC 선택: ${randomChoice}`); // 콘솔에 출력!
+  return randomChoice;
 }
 
-// 선택한 가위바위보에 맞는 이미지 반환 함수
-function getImageForChoice(choice) {
-  const comRsp = {
-    가위: "https://cdn-icons-png.flaticon.com/128/2997/2997926.png", // 가위 이미지
-    바위: "https://cdn-icons-png.flaticon.com/128/2997/2997925.png", // 바위 이미지
-    보: "https://cdn-icons-png.flaticon.com/128/2997/2997924.png", // 보 이미지
-  };
-  return (
-    comRsp[choice] || "https://cdn-icons-png.flaticon.com/128/6688/6688580.png"
-  ); // 기본 이미지
+function disableButtons(state) {}
+function handleUserChoice(event) {
+  if (index === texts.length - 1 && !userChoiceMade) {
+    userChoiceMade = true;
+    document.getElementById("resetButton").disabled = false;
+    document.getElementById("가위").disabled = true;
+    document.getElementById("바위").disabled = true;
+    document.getElementById("보").disabled = true;
+    event.target.disabled = false; // 선택한 버튼만 활성화
+    document.getElementById("resultText");
+  }
 }
 
-// 가위바위보 버튼 클릭 시 동작
-document.querySelectorAll("button[id$='Button']").forEach((button) => {
-  button.addEventListener("click", function () {
-    if (index === texts.length - 1 && !userChoiceMade) {
-      userChoiceMade = true;
-      const userChoice = this.textContent.trim().slice(0, 2);
-      const pcChoice = getRandomChoice();
+// 가위바위보 선택
+document.getElementById("가위").addEventListener("click", handleUserChoice);
+document.getElementById("바위").addEventListener("click", handleUserChoice);
+document.getElementById("보").addEventListener("click", handleUserChoice);
 
-      // 이미지 변경
-      const pcImage = document.querySelector(".comRsp img");
-      if (pcImage) {
-        pcImage.src = getImageForChoice(pcChoice);
-      }
+// //* PC랜덤
+let user = ["가위", "바위", "보"];
 
-      // 결과 출력
-      document.getElementById(
-        "displayText"
-      ).textContent = `사용자: ${userChoice} | PC: ${pcChoice} → ${determineWinner(
-        userChoice,
-        pcChoice
-      )}`;
-
-      disableButtons(this);
-    }
-  });
+document.getElementById("가위").addEventListener("click", function () {
+  let com = user[Math.floor(Math.random() * 3)];
+  let userChoice = "가위";
+  if (userChoice === com) {
+    console.log("👊무승부👊");
+  } else if (
+    (userChoice === "가위" && com === "보") ||
+    (userChoice === "바위" && com === "가위") ||
+    (userChoice === "보" && com === "바위")
+  ) {
+    console.log("👍승리👍");
+  } else {
+    console.log("👎패배👎");
+  }
 });
 
-// document.getElementById("resetButton");
-// document.addEventListener("click", function () {
-//   if (interval) clearInterval(interval);
-//   index = 0;
-//   userChoiceMade = false;
-//   document.getElementById("displayText").textContent = "안내면진다";
-//   document.getElementById("startButton").disabled = false;
-// });
+document.getElementById("바위").addEventListener("click", function () {
+  let com = user[Math.floor(Math.random() * 3)];
+  let userChoice = "바위";
+  if (userChoice === com) {
+    console.log("👊무승부👊");
+  } else if (
+    (userChoice === "가위" && com === "보") ||
+    (userChoice === "바위" && com === "가위") ||
+    (userChoice === "보" && com === "바위")
+  ) {
+    console.log("👍승리👍");
+  } else {
+    console.log("👎패배👎");
+  }
+});
 
-// function stopInterval() {
-//   if (index === 3) clearInterval(index);
-//   return;
-// }
+document.getElementById("보").addEventListener("click", function () {
+  let com = user[Math.floor(Math.random() * 3)];
+  let userChoice = "보";
+  if (userChoice === com) {
+    console.log("👊무승부👊");
+  } else if (
+    (userChoice === "가위" && com === "보") ||
+    (userChoice === "바위" && com === "가위") ||
+    (userChoice === "보" && com === "바위")
+  ) {
+    console.log("👍승리👍");
+  } else {
+    console.log("👎패배👎");
+  }
+});
 
-//* 1개 선택 후 나머지는 비활성화
-function disableButtons(clickedButton) {
-  let buttons = document.querySelectorAll("button");
-  buttons.forEach((button) => {
-    if (button !== clickedButton) {
-      button.disabled = true;
-    }
-  });
+setTimeout(() => {
+  clearInterval(interval);
+  const computerChoice = Math.floor(Math.random() * image.length);
+  const userChoice = Math.floor(Math.random() * image.length);
+  document.getElementById("image").src = image[computerChoice];
+
+  let resultMessage = "";
+  if (computerChoice === userChoice) {
+    resultMessage = "👊무승부👊";
+  } else if (
+    (computerChoice === 0 && userChoice === 2) ||
+    (computerChoice === 1 && userChoice === 0) ||
+    (computerChoice === 2 && userChoice === 1)
+  ) {
+    resultMessage = "👎패배👎";
+  } else {
+    resultMessage = "👍승리👍";
+  }
+
+  document.getElementById("event");
+  document.innerText = resultMessage;
+  document.getElementById("result-detail");
+}, 2000);
+
+openModal();
+function openModal() {
+  document.getElementById("modal-overlay").style.display = "block";
+  document.getElementById("modal").style.display = "block";
 }
 
-//* 비활성화된 버튼 내 이미지 흐리게 처리하기
-document.addEventListener("DOMContentLoaded", function () {
-  const button = document.getElementById("blur-button");
-  const image = document.getElementById("button-image");
+function closeModal() {
+  document.getElementById("modal-overlay").style.display = "none";
+  document.getElementById("modal").style.display = "none";
+}
 
-  //   button.addEventListener("mouseover", function () {
-  //     image.style.filter = "blur(4px)";
-  //   });
+// reset 버튼
+const resetButton = document.getElementById("resetButton");
 
-  //   button.addEventListener("mouseout", function () {
-  //     image.style.filter = "blur(4px)";
-  //   });
+resetButton.addEventListener("click", () => {
+  location.reload(true);
 });

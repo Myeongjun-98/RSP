@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    -
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>가위바위보 게임</title>
     <link rel="stylesheet" href="style.css" />
@@ -10,17 +10,23 @@
   <body>
     <div id="root">
       <h1>가위바위보 게임</h1>
-      <div class="comRsp" ,img id="comRsp"></div>
+
+      <div id="game-container">
+        <img
+          id="image"
+          src="https://cdn-icons-png.flaticon.com/128/6688/6688560.png"
+          alt="가위바위보"
+        />
+      </div>
+
       <div>
         <p>VS</p>
       </div>
 
-      <div alt="btn">
-        <button id="scissorsButton" onclick="disableButtons(this)">
-          가위✌
-        </button>
-        <button id="rockButton" onclick="disableButtons(this)">바위✊</button>
-        <button id="paperButton" onclick="disableButtons(this)">보🖐</button>
+      <div class="rsp-btn">
+        <button id="가위" onclick="disableButtons(this)">가위✌</button>
+        <button id="바위" onclick="disableButtons(this)">바위✊</button>
+        <button id="보" onclick="disableButtons(this)">보🖐</button>
       </div>
       <p id="displayText">안내면진다</p>
 
@@ -28,8 +34,61 @@
         <button id="startButton">Start</button>
         <button id="resetButton">Reset</button>
       </div>
-
-      <script src="index.js"></script>
     </div>
+
+    <div id="modal-overlay"></div>
+    <div id="modal">
+      <div id="event"></div>
+      <div id="result-detail"></div>
+      <button onclick="closeModal()">닫기</button>
+    </div>
+    <!DOCTYPE html>
+    <html lang="ko">
+      <head>
+        <meta charset="UTF-8" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>가위바위보 게임</title>
+        <link rel="stylesheet" href="style.css" />
+      </head>
+      <body>
+        <div id="root">
+          <h1>가위바위보 게임</h1>
+
+          <div id="game-container">
+            <img
+              id="image"
+              src="https://cdn-icons-png.flaticon.com/128/6688/6688560.png"
+              alt="가위바위보"
+            />
+          </div>
+
+          <div>
+            <p>VS</p>
+          </div>
+
+          <div class="rsp-btn">
+            <button id="가위" onclick="disableButtons(this)">가위✌</button>
+            <button id="바위" onclick="disableButtons(this)">바위✊</button>
+            <button id="보" onclick="disableButtons(this)">보🖐</button>
+          </div>
+          <p id="displayText">안내면진다</p>
+
+          <div>
+            <button id="startButton">Start</button>
+            <button id="resetButton">Reset</button>
+          </div>
+        </div>
+
+        <div id="modal-overlay"></div>
+        <div id="modal">
+          <div id="event"></div>
+          <div id="result-detail"></div>
+          <button onclick="closeModal()">닫기</button>
+        </div>
+
+        <script src="index.js"></script>
+      </body>
+    </html>
   </body>
 </html>
